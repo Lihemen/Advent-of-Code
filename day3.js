@@ -419,20 +419,25 @@ function right7Down1(array) {
 	console.log(trees);
 }
 right7Down1(input);
-function right1Down2(array) {
-	const arrangement = [...array];
-	const pattern = [];
-	const mapped = createMap(1, arrangement.length);
-	const maxLength = mapped[arrangement.length - 1];
-	const newArr = arrangement.map((el) =>
-		extendToDesiredLength(el, maxLength + 1)
-	);
-	for (let i = 0; i < newArr.length; i++) {
-		if (i % 2 !== 0) {
-			pattern.push(newArr[i].charAt(mapped[i]));
+
+// NOT MY SOLUTION REALLY
+// THIS FUNCTION PROVIDES AN ALL IN ONE SOLUTION FOR ANY TRAVERSAL
+/**
+ *
+ * @param {String[]} input
+ * @param {Number} right
+ * @param {Number} down
+ */
+function traverse(input, right, down) {
+	let hits = 0;
+	let currentPos = 0;
+	let size = input[0].length;
+	for (let i = 0; i < input.length; i += down) {
+		if (input[i].charAt(currentPos) == '#') {
+			hits++;
 		}
+		currentPos = (currentPos + right) % size;
 	}
-	const trees = pattern.filter((el) => el === '#').length;
-	console.log(trees);
+	console.log(hits);
+	return hits;
 }
-right1Down2(input);
