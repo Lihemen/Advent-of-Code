@@ -895,3 +895,25 @@ function mapToAnswer(array) {
 }
 
 customCustoms(input);
+
+function challengeTwo(array) {
+	let hits = 0;
+	array.forEach((group) => {
+		let og = group[0].split('');
+
+		for (let i = 1; i < group.length; i++) {
+			let comp = group[i].split('');
+			og.forEach((el) => {
+				if (comp.indexOf(el) === -1) {
+					og = og.filter((x) => x !== el);
+				}
+			});
+		}
+		hits += og.length;
+	});
+
+	console.log(hits);
+	return hits;
+}
+
+challengeTwo(input);
